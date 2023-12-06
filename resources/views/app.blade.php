@@ -6,7 +6,6 @@
 
     <title>Laravel app</title>
 
-    <!-- Styles -->
     <style>
         body {
             background-color: #f3f4f6;
@@ -61,26 +60,14 @@
 <body>
 
     <div class="container">
-        <!-- Header -->
         <header>
-            <div class="logo">
-                <img src="images/logo.webp" alt="Logo">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
+            @include('_navigation')
         </header>
 
-        <!-- Content -->
         <div class="content">
             @yield('content')
         </div>
 
-        <!-- Footer -->
         <footer>
             <p>&copy; {{ date('Y') }} Nick vdT. All rights reserved.</p>
         </footer>

@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +32,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
+Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
