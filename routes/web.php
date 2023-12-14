@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
@@ -38,3 +39,6 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
+//Route::get('/projects/add', [ ProjectController::class, 'add' ])->name('project.add');
+Route::get('/project', [ ProjectController::class, 'index' ])->name('project');
+
