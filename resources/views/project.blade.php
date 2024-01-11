@@ -11,8 +11,10 @@
             @foreach($project as $project )
             <h2>{{$project->titel}}</h2>
             <p>{{$project->description}}</p>
+            <a href="{{ route('project.show', $project) }}">Bekijk dit</a>
             @endforeach
         </div>
+
         <footer>
             <p>&copy; {{ date('Y') }} Nick vdT. All rights reserved.</p>
         </footer>
