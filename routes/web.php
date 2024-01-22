@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MyControler;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
+  
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
@@ -43,3 +44,20 @@ Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/project', [ ProjectController::class, 'index' ])->name('project');
 
 Route::get('/project/{project}', [ProjectController::class, 'show'])->name('project.show');
+Route::prefix('/dashboard')
+     ->middleware(['auth', 'verified'])
+     ->group(function () {
+         Route::get(
+             '/',
+             function () {
+                 return view('dashboard');
+             })->name('dashboard');
+
+         Route::resources(
+             [
+                 'project' => MyControler::class,
+             ]
+         );
+     });
+
+     
