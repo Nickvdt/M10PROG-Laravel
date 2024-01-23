@@ -43,6 +43,7 @@ Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 //Route::get('/projects/add', [ ProjectController::class, 'add' ])->name('project.add');
 Route::get('/project', [ ProjectController::class, 'index' ])->name('project');
 
+
 Route::get('/project/{project}', [ProjectController::class, 'show'])->name('project.show');
 Route::prefix('/dashboard')
      ->middleware(['auth', 'verified'])
@@ -55,7 +56,7 @@ Route::prefix('/dashboard')
 
          Route::resources(
              [
-                 'project' => MyControler::class,
+                 'projects' => MyControler::class,
              ]
          );
      });

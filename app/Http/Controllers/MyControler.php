@@ -13,7 +13,7 @@ class MyControler extends Controller
     public function index()
     {
         $projects = Project::paginate(2);
-        return view('dashboard.projects.index', ['projects'=>$projects]);
+        return view('dashboard.projects.index', ['projects' => $projects]);
     }
 
     /**
@@ -29,8 +29,22 @@ class MyControler extends Controller
      */
     public function store(Request $request)
     {
-        dump( $request->all() );
+        $valid = $request->validate([
+            'titel' => 'required|unique:projects,titel|max:255',
+            'description' => 'required',
+        ]);
+
+        $project = new Project([
+            'titel' => $valid['titel'],
+            'description' => $valid['description'],
+        ]);
+
+        $project->save();
+
+        return redirect(route('project.show', $project->id));
     }
+
+
 
     /**
      * Display the specified resource.
@@ -45,15 +59,33 @@ class MyControler extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('dashboard.projects.edit', ['project' => $project]);
+
     }
 
     /**
      * Update the specified resource in storage.
      */
+    /**
+     * Update the specified resource in storage.
+     * 
+     * @param Request $request
+     * @param Project $project
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Request $request, Project $project)
     {
-        //
+        $valid_data = $request->validate(
+            [
+                'titel' => 'required|unique:projects|max:255',
+                'description' => 'required'
+            ]
+        );
+
+        $project->update($valid_data);
+        $project->save();
+
+        return redirect(route('project.show', $project->id));
     }
 
     /**
@@ -61,6 +93,7 @@ class MyControler extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect(route('projects.index'))->with('alert', 'Het item '.$project->title.' is nu weg.');
     }
 }
