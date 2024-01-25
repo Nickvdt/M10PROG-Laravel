@@ -39,6 +39,9 @@ class MyControler extends Controller
             'description' => $valid['description'],
         ]);
 
+        $path = $request->file('image')?->store('public');
+
+        $project->image = $path;
         $project->save();
 
         return redirect(route('project.show', $project->id));
@@ -81,9 +84,10 @@ class MyControler extends Controller
                 'description' => 'required'
             ]
         );
+        $path = $request->file('image')?->store('public');
 
+        $project->image = $path;
         $project->update($valid_data);
-        $project->save();
 
         return redirect(route('project.show', $project->id));
     }

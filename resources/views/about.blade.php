@@ -8,7 +8,7 @@
 
         <div class="content">
         <h1>About pagina</h1>
-            <p>Hier vertel ik wat of mezelf maar niet heus.</p>
+            <p></p>
         </div>
 
         <footer>

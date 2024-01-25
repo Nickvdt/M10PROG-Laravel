@@ -155,20 +155,26 @@
         </div>
         @endif
 
-        <form method="post" action="{{ $route }}" class="project-form">
+        <form method="post" enctype="multipart/form-data" action="{{ $route }}" class="project-form">
             @csrf
             {{ method_field($method) }}
             <div class="form-group">
                 <label class="form-label" for="title">
                     Titel
                 </label>
-                <input class="form-input" id="title" name="title" type="text" placeholder="titel" value="{{old('titel', $project->titel)}}" class="block w-full rounded-md border-0">  
+                <input class="form-input" id="title" name="titel" type="text" placeholder="titel" value="{{old('titel', $project->titel)}}" class="block w-full rounded-md border-0">  
             </div>
             <div class="form-group">
                 <label class="form-label" for="description">
                     Beschrijving
                 </label>
                 <input class="form-input" id="description" name="description" type="text" placeholder="beschrijving">
+            </div>
+            <div>
+                <label class="form-label" for="description">
+                    <input type="file" name="image">
+                </label>
+            
             </div>
             <button type="submit" class="form-button">
                 Opslaan
