@@ -18,7 +18,10 @@ use App\Http\Controllers\WelcomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/project/{project}/download', [ProjectController::class, 'download'])
+    ->name('project.download');
+Route::get('/project/download_all', [ProjectController::class, 'downloadAll'])
+    ->name('project.download_all');
 Route::get('/', function () {
     return view('welcome');
 });
@@ -33,32 +36,32 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-  
+require __DIR__ . '/auth.php';
+
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 //Route::get('/projects/add', [ ProjectController::class, 'add' ])->name('project.add');
-Route::get('/project', [ ProjectController::class, 'index' ])->name('project');
+Route::get('/project', [ProjectController::class, 'index'])->name('project');
 
 
 Route::get('/project/{project}', [ProjectController::class, 'show'])->name('project.show');
 Route::prefix('/dashboard')
-     ->middleware(['auth', 'verified'])
-     ->group(function () {
-         Route::get(
-             '/',
-             function () {
-                 return view('dashboard');
-             })->name('dashboard');
+    ->middleware(['auth', 'verified'])
+    ->group(function () {
+        Route::get(
+            '/',
+            function () {
+                return view('dashboard');
+            }
+        )->name('dashboard');
 
-         Route::resources(
-             [
-                 'projects' => MyControler::class,
-             ]
-         );
-     });
+        Route::resources(
+            [
+                'projects' => MyControler::class,
+            ]
+        );
+    });
 
-     

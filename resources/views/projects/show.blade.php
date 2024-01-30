@@ -9,6 +9,11 @@
             <div class="content">
                 <h2>{{$project->titel}}</h2>
                 <p>{{$project->description}}</p>
+                <div>
+                    <a href="{{ route('project.download', $project) }}">
+                        Download dit project
+                    </a>
+                </div>
                 <article>
                     @if($project->image)
                     <img src="{{Storage::url($project->image)}}">

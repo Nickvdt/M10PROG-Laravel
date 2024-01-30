@@ -92,6 +92,11 @@
         @auth
         <a href="{{ route('projects.create') }}" class="">Nieuw Project</a>
         @endauth
+        <div>
+            <a href="{{ route('project.download_all') }}">
+                Download Alle Projecten
+            </a>
+        </div>
 
     </div>
     {{$projects->links()}}
